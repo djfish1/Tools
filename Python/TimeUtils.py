@@ -26,12 +26,12 @@ def epochFromNice(timeToConvert=None):
   else:
     yearMonthDay, hourMinuteSec = timeToConvert.split('_')
     (year, month, day) = (int(x) for x in yearMonthDay.split('-'))
-    hmsSplit = hourMinuteSec.split('.')
-    if len(hmsSplit) > 1:
-      microseconds = int(hmsSplit[1])
-    else:
-      microseconds = 0
-    (hour, minute, sec) = (int(x) for x in hmsSplit[0].split('-'))
+    hmsStr = hourMinuteSec.split('-')
+    hour = int(hmsStr[0])
+    minute = int(hmsStr[1])
+    secFloat = float(hmsStr[2])
+    sec = int(secFloat)
+    microseconds = int((secFloat - sec) * 1E6)
     dateTime = datetime.datetime(year, month, day, hour, minute, sec, microseconds)
     retTime = time.mktime(dateTime.timetuple()) + microseconds / 1.0E6
     #strpTime = time.strptime(timeToConvert, '%Y-%m-%d_%H-%M-%S')
