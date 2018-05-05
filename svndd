@@ -1,0 +1,21 @@
+#!/bin/tcsh -f
+# Usage: svndd
+# Purpose: Get the differences between local files and the repository.
+
+set ff = `svn status | awk '{print $2}'`
+
+# Note: quotes are needed around stat, otherwise ? gets intepreted weirdly.
+set tmpFile = `mktemp`
+foreach f ($ff)
+  set stat = `svn status $f | awk '{print $1}'`
+  if ("$stat" == 'M') then
+    echo "MODIFIED: $f"
+    svn cat $f > $tmpFile
+    gvim --nofork -d $f $tmpFile >& /dev/null
+  else if ("$stat" == 'A') then
+    echo "ADDED: $f"
+  else if ("$stat" == '?') then
+    echo "UNKNOWN: $f"
+  endif
+end
+rm $tmpFile

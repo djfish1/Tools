@@ -1,0 +1,16 @@
+#!/bin/tcsh -f
+
+set opts = ( '-n' )
+while ($# > 1)
+  set -l opts = ( $opts $1 )
+  shift
+end
+set noglob
+set pattern = "$1"
+#echo "options: $opts"
+#echo "pattern: $pattern"
+
+grep $opts -R "$pattern" --exclude=*.pyc --exclude=*.dll --exclude=*.exe --exclude=*.class | \
+  awk 'BEGIN{FS=":"; OFS=" "}{printf("%s +%s : %s\n", $1, $2, $3)}'
+unset noglob
+

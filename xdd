@@ -1,0 +1,38 @@
+#!/bin/tcsh -f
+#Usage: xdd <dir0> <dir1> [maxdepth=1]
+
+set dir0 = $1
+shift
+set dir1 = $1
+shift
+set maxdepth=1
+if ($# > 0) then
+  set maxdepth = $1
+endif
+
+set ff = ( ` find $dir0 -maxdepth $maxdepth -type f -printf '%P\n' ` )
+set -f ff = ( $ff ` find $dir1 -maxdepth $maxdepth -type f -printf '%P\n' ` )
+
+# Note: quotes are needed around stat, otherwise ? gets intepreted weirdly.
+set tmpFile = `mktemp`
+foreach f ($ff)
+  if ( -f $dir0/$f ) then
+    if ( -f $dir1/$f ) then
+      diff $dir0/$f $dir1/$f >& /dev/null
+      set diffStat = $?
+      if ($diffStat == 0) then
+        echo "IDENTICAL: $dir0/$f and $dir1/$f are the same"
+      else if ($diffStat == 1) then
+        echo "DIFFER: $dir0/$f and $dir1/$f are different"
+        gvim --nofork -d $dir0/$f $dir1/$f >& /dev/null
+      else
+        echo "PROBLEM: couldn't compare $dir0/$f and $dir1/$f"
+      endif
+    else
+      echo "MISSING: $dir1/$f does not exist"
+    endif
+  else
+    echo "MISSING: $dir0/$f does not exist"
+  endif
+end
+rm $tmpFile

@@ -1,0 +1,15 @@
+#!/bin/tcsh -f
+# Usage: svndd
+# Purpose: Get the differences between local files and the repository.
+
+set f = $1
+set revStr = '-rHEAD'
+if ($# >= 2) then
+  set revStr = $2
+endif
+echo "REVISION: $revStr"
+
+set tmpFile = `mktemp`
+svn cat $revStr $f > $tmpFile
+gvim --nofork -d $f $tmpFile >& /dev/null
+rm $tmpFile
