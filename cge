@@ -1,5 +1,7 @@
 #!/bin/tcsh -f
-
+# Purpose: grep for patterns (using cg) and then prompted for match to edit. Currently hardcoded to be gvim editor.
+# Usage: cge [grep options] <pattern>
+#
 set toolsDir = `which $0`
 set toolsDir = $toolsDir:h
 
