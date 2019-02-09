@@ -1,0 +1,39 @@
+setenv CODE_HOME $HOME/Code
+setenv SARA_HOME $CODE_HOME/SaraTrunk
+setenv TP_HOME $CODE_HOME/Terrapan/terrapan-master/pytpl/trunk
+setenv TOOLS_HOME $HOME/Code/Git/Tools
+setenv SARA_SVN https://geosvn.sdsu.edu/svn/sara/trunk
+
+set -f path=($path $TOOLS_HOME $HOME/Software/JDK/jdk1.8.0_121/bin)
+set prompt='\n(%h)--> %~ <--\n%n:%P> '
+
+set history = 5000
+set savehist = ($history 'merge')
+set histfile = $HOME/.tcsh_hist
+set histlit
+set sethistdup
+
+setenv PYTHONSTARTUP $HOME/.config/startup.py
+#setenv PYTHONPATH ${TP_HOME}:$TOOLS_HOME/Python
+setenv PYTHONPATH $TOOLS_HOME/Python
+
+setenv SVN_EDITOR 'gvim --nofork'
+
+alias sara "cd $SARA_HOME"
+alias saras "cd $SARA_HOME/SARA/java/src/SARA"
+alias tp "cd $TP_HOME"
+alias proj "cd $TP_HOME/pytpl/projection"
+alias tools "cd $TOOLS_HOME"
+alias code "cd $CODE_HOME"
+
+alias up 'source $TOOLS_HOME/upp.csh \!*'
+alias v 'gvim \!* >& /dev/null'
+alias scs 'source $HOME/.tcshrc'
+alias vcs 'gvim $HOME/.tcshrc >& /dev/null'
+unalias ls
+alias ls 'ls -Fp'
+alias ll 'ls -ltrFp --color'
+alias lla 'ls -altrFp --color'
+alias math 'echo \!* | bc -l'
+alias myjobs 'ps -aef | grep $USER'
+
