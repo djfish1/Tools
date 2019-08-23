@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 from SmartPrint import println
 
@@ -16,6 +16,7 @@ def makeSinglePlot(data, opts, fileName):
     fig.text(1,1, fileName, horizontalalignment='right', verticalalignment='top')
   else:
     fig = plt.figure(1)
+    plt.hold(True)
   ax = fig.gca()
   if doScatter:
     sc = ax.scatter(data[:,0] / opts.xScale, data[:,1:-1] / opts.yScale, 25,
@@ -25,7 +26,8 @@ def makeSinglePlot(data, opts, fileName):
     cb.set_label(opts.cLabel)
   else:
     line = ax.plot(data[:,0] / opts.xScale, data[:,1:] / opts.yScale,
-        opts.marker, markersize=8, markerfacecolor='None', label=fileName)
+        opts.marker, markersize=8, label=fileName)
+        #opts.marker, markersize=8, markerfacecolor='None', label=fileName)
   ax.set(xlabel=opts.xLabel, ylabel=opts.yLabel, title=opts.title)
 
 if __name__ == '__main__':
