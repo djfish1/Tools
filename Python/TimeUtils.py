@@ -8,7 +8,7 @@ def niceFromEpoch(timeToPrint=None, showMicros=True):
         showMicros determines whether or not written to microsecond precision """
   if timeToPrint is None:
     timeToPrint = time.time()
-  dateTime = datetime.datetime.utcfromtimestamp(timeToPrint)
+  dateTime = datetime.datetime.fromtimestamp(timeToPrint)
   retStr = '-'.join(('{0:04d}'.format(dateTime.year), '{0:02d}'.format(dateTime.month), \
       '{0:02d}'.format(dateTime.day))) + '_' + '-'.join(('{0:02d}'.format(dateTime.hour), \
       '{0:02d}'.format(dateTime.minute), '{0:02d}'.format(dateTime.second)))
