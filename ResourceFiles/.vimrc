@@ -1,13 +1,14 @@
 syntax on
-set tabstop=2
-set shiftwidth=2
-set smarttab
-set expandtab
-"set cindent
-"set autoindent
 filetype on
 filetype plugin on
 filetype indent on
+set smarttab
+set expandtab
+set cindent
+set autoindent
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 
 set smartcase
 set hlsearch
@@ -26,3 +27,4 @@ set tags=./tags,./../tags,./../../tags,./../../../tags,./../../../../tags,./../.
 nmap  g
 
 set diffopt+=vertical
+autocmd FileType python setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2

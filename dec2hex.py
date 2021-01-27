@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """ Print decimal number in hexadecimal """
 import sys
 if (len(sys.argv) > 1):

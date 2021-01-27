@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """ Convert degrees/minutes/seconds to decimal degrees """
 import math
 import sys

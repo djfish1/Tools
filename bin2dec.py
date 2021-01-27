@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """ Print binary number in decimal """
 import sys
 if (len(sys.argv) > 1):
