@@ -8,3 +8,8 @@ set guifont=Monospace\ 10
 command! FontNormal set guifont=Monospace\ 10
 command! FontBig set guifont=Monospace\ 12
 command! FontHuge set guifont=Monospace\ 16
+
+set guioptions-=T
+
+set nocursorline
+set nocursorcolumn

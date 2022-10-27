@@ -6,17 +6,19 @@ set smarttab
 set expandtab
 set cindent
 set autoindent
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 
+set ignorecase
 set smartcase
 set hlsearch
 set history=50
 
 set showcmd
 set laststatus=2
-set statusline=%<%t\ %m%r%=l:%l/%L\ c:%c
+set statusline=%F\ %m%r%=l:%l/%L\ c:%c
+set number
 
 set textwidth=0
 set nowrap
@@ -25,6 +27,19 @@ set tags=./tags,./../tags,./../../tags,./../../../tags,./../../../../tags,./../.
 
 " Always pull up the menu to select the actual tag you want.
 nmap  g
+command! AFSIM set expandtab shiftwidth=3 softtabstop=3 tabstop=3
 
 set diffopt+=vertical
-autocmd FileType python setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4
+
+if &diff
+    colorscheme blue
+else
+    colorscheme default
+endif
+
+set cursorline
+set cursorcolumn
+
+let &t_SI="[6 q"
+let &t_EI="[2 q"

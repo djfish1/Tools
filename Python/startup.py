@@ -41,4 +41,15 @@ if os.path.exists(historyPath):
 atexit.register(saveHistory)
 
 mat.interactive(True)
+
+def _makeTestPlot(marker='o', showLegend=True):
+  x = numpy.arange(0, 2*numpy.pi, 0.2)
+  for i in range(16):
+    y = numpy.sin(x + i * 0.1)
+    plt.plot(x, y, marker, label='v{0:d}'.format(i))
+  ax = plt.gca()
+  ax.set(xlabel='Time', ylabel='Voltage', title='Demo Plot')
+  if showLegend:
+    ax.legend()
+
 del atexit, historyPath, readline, rlcompleter, saveHistory

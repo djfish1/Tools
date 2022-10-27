@@ -1,0 +1,39 @@
+# enable bash completion in interactive shells
+#if ! shopt -oq posix; then
+#  if [ -f /usr/share/bash-completion/bash_completion ]; then
+#    . /usr/share/bash-completion/bash_completion
+#  elif [ -f /etc/bash_completion ]; then
+#    . /etc/bash_completion
+#  fi
+#fi
+
+PS1='${debian_chroot:+($debian_chroot)}\n---> \w <---\n\D{%Y-%m-%d_%H-%M-%S} : \D{%s}\n\u@\h (\!)\$ '
+
+function title {
+    export PROMPT_COMMAND="echo -ne \"\033]0;$1 ($USER@$HOSTNAME)\007\""
+}
+title
+
+export PYTHONPATH=$HOME/Code/GitViasat/Tools/Python
+export PYTHONSTARTUP=$HOME/Code/GitViasat/Tools/Python/startup.py
+
+export PATH=$PATH:$HOME/Code/GitViasat/Tools
+#export DISPLAY=localhost:0.0
+export GIT_EXTERNAL_DIFF=$HOME/Code/GitViasat/Tools/gitDiff.sh
+
+export HISTCONTROL=ignoredups:erasedups
+export HISTSIZE=5000
+export HISTIGNORE="python":"exit":"history":"ls":"ll"
+
+ulimit -c unlimited
+
+alias ll='\ls --color -ltrh'
+alias ls='\ls --color'
+alias myjobs='ps -aef | grep $USER'
+alias v='gvim'
+alias up='. upp.sh'
+
+export AWS_DFISH_LIGHTWEIGHT=10.137.52.117
+export AWS_DFISH_COMSA=10.137.52.79
+
+alias tmux4='tmux new-session -s four -n CMD \; new-window -n CODE \; new-window -n DATA \; new-window -n HELP-TEST \; attach'

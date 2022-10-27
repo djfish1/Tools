@@ -11,10 +11,10 @@ import sys
 from SmartPrint import println
 
 def getFigAndAxes(topRightLabel=None):
-  fig = plt.figure()
+  fig = PlotUtils.makeFigure()
   if topRightLabel is not None:
     fig.text(1,1, topRightLabel, horizontalalignment='right', verticalalignment='top')
-  ax = plt.gca()
+  ax = fig.add_subplot(111)
   return (fig, ax)
 
 def makeHistograms(data, opts):

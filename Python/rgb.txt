@@ -754,3 +754,10 @@
 133  15 137   Leidos Ultraviolet
 190 191 189   Leidos Gray
 190 191 189   Leidos Grey
+0 157 224 Viasat Blue 3
+32 46 57 Viasat Gray 1
+190 215 51 Viasat Green 3
+0 63 115 Viasat Dark Blue
+94 162 21 Viasat Dark Green
+239 130 1 Viasat Orange
+167 0 102 Viasat Magenta
