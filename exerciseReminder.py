@@ -3,13 +3,14 @@ import optparse
 import random
 import time
 import tkinter.messagebox as msg
+import tkinter.simpledialog as simp
 
 def pickExercise():
-    chest = ('pushups', 'wide-pushup')
+    chest = ('pushups', 'wide-pushups')
     arms = ('curls', 'tricep extensions', 'reverse curls')
     shoulders = ('shoulder flies', 'lateral raises', 'front raises')
     legs = ('lunges', 'squats')
-    back = ('bent row', 'lower back raises')
+    back = ('bent rows', 'lower back raises')
     # Since there are more exercises for certain categories, first
     # randomly pick the category, so that way you don't cheat and
     # only work out body parts with more options
@@ -25,20 +26,22 @@ def doMainLoop(delayMin):
         resp = False
         doneText = ''
         for k, v in done.items():
-            doneText = '\n'.join((doneText, '{0:s} done {1:d} times'.format(k, v)))
+            doneText = '\n'.join((doneText, '{0:s}: {1:d}'.format(k, v)))
         while resp is False:
             ex = pickExercise()
             resp = msg.askyesnocancel('Exercise time.',
                     message='\n'.join(('Do some ' + ex + '?',
-                        'Cancel=quit',
-                        'Yes=did it!',
-                        'No=pick new exercise',
+                        'Yes = did it!',
+                        'No = pick new exercise',
+                        'Cancel = quit',
                         doneText)))
         if resp is None:
             if msg.askyesno('Quit?', message='Really quit?'):
                 break
         elif resp:
-            done[ex] = done.get(ex, 0) + 1
+            numReps = simp.askinteger('Repetitions', prompt='How many ' + ex + ' did you do?')
+            if numReps is not None:
+                done[ex] = done.get(ex, 0) + numReps
         time.sleep(delayMin * 60)
 
 if __name__ == "__main__":
