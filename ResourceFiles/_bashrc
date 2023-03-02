@@ -12,6 +12,22 @@ PS1='${debian_chroot:+($debian_chroot)}\n---> \w <---\n\D{%Y-%m-%d_%H-%M-%S} : \
 function title {
     export PROMPT_COMMAND="echo -ne \"\033]0;$1 ($USER@$HOSTNAME)\007\""
 }
+function tmuxN {
+    local cmd="tmux new-session -s $1"
+    shift
+    if (( $# >= 1 )); then
+        local cmd="$cmd -n $1"
+        shift
+    fi
+    while (( $# >= 1 )); do
+        local cmd="$cmd \\; new-window -n $1"
+        shift
+    done
+    local cmd="$cmd \; attach"
+    echo "Running: $cmd"
+    eval $cmd
+}
+
 title
 
 export PYTHONPATH=$HOME/Code/GitViasat/Tools/Python

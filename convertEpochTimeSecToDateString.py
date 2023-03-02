@@ -7,7 +7,7 @@ import TimeUtils
 import SmartPrint
 
 if len(sys.argv) < 2:
-  t = time.time()
+    t = time.time()
 else:
-  t = float(sys.argv[1])
+    t = float(sys.argv[1])
 print(TimeUtils.niceFromEpoch(t))
