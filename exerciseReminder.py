@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import optparse
+import os
 import random
 import time
 import tkinter.messagebox as msg
@@ -9,16 +10,25 @@ def pickExercise():
     chest = ('pushups', 'wide-pushups')
     arms = ('curls', 'tricep extensions', 'reverse curls')
     shoulders = ('shoulder flies', 'lateral raises', 'front raises')
+    back = ('bent rows', 'lower back raises', 'pull backs', 'pull downs')
     legs = ('lunges', 'squats')
-    back = ('bent rows', 'lower back raises')
+    core = ('situps', 'side bends')
+    stretching = ('hamstring stretch', 'back-stretch')
     # Since there are more exercises for certain categories, first
     # randomly pick the category, so that way you don't cheat and
     # only work out body parts with more options
-    categories = (chest, arms, shoulders, legs, back)
+    categories = (chest, arms, shoulders, legs, back, core, stretching)
     category = random.choice(categories)
     exercise = random.choice(category)
     #print(category, exercise)
     return exercise
+
+def logExercise(ex, numReps):
+    now = time.time()
+    exNoSpace = ex.replace(' ', '_')
+    with open(os.path.join('ExerciseLogs', exNoSpace + '.log'), 'a') as f:
+        f.write('{0:.3f} {1:d}\n'.format(now, numReps))
+        f.flush()
 
 def doMainLoop(delayMin):
     done = {}
@@ -42,14 +52,13 @@ def doMainLoop(delayMin):
             numReps = simp.askinteger('Repetitions', prompt='How many ' + ex + ' did you do?')
             if numReps is not None:
                 done[ex] = done.get(ex, 0) + numReps
+                logExercise(ex, numReps)
         time.sleep(delayMin * 60)
 
 if __name__ == "__main__":
     op = optparse.OptionParser()
     op.add_option('-d', '--delay', type=float, dest='delay', help='Time (minutes) between reminders.', default=10)
-    #op.add_option('-s', '--serverIp', type=str, dest='serverIp', help='Server IP', default=None)
-    #op.add_option('-p', '--serverPort', type=int, dest='serverPort', help='Server Port', default=None)
-    #op.add_option('-u', '--userName', type=str, dest='userName', help='User name (debug only)', default=None)
     (opts, args) = op.parse_args()
+    random.seed(None)
     doMainLoop(opts.delay)
 
