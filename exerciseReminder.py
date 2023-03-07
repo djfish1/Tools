@@ -2,6 +2,7 @@
 import optparse
 import os
 import random
+import sys
 import time
 import tkinter.messagebox as msg
 import tkinter.simpledialog as simp
@@ -9,7 +10,7 @@ import tkinter.simpledialog as simp
 def pickExercise():
     chest = ('pushups', 'wide-pushups')
     arms = ('curls', 'tricep extensions', 'reverse curls')
-    shoulders = ('shoulder flies', 'lateral raises', 'front raises')
+    shoulders = ('shoulder flies', 'military presses', 'front raises')
     back = ('bent rows', 'lower back raises', 'pull backs', 'pull downs')
     legs = ('lunges', 'squats')
     core = ('situps', 'side bends')
@@ -23,14 +24,18 @@ def pickExercise():
     #print(category, exercise)
     return exercise
 
-def logExercise(ex, numReps):
+def logExercise(ex, numReps, testMode=False):
     now = time.time()
     exNoSpace = ex.replace(' ', '_')
-    with open(os.path.join('ExerciseLogs', exNoSpace + '.log'), 'a') as f:
+    logDir = 'ExerciseLogs' if not testMode else 'TestExLogs'
+    fullLogDir = os.path.join(sys.path[0], logDir)
+    if not os.path.isdir(fullLogDir):
+        os.mkdir(fullLogDir)
+    with open(os.path.join(fullLogDir, exNoSpace + '.log'), 'a') as f:
         f.write('{0:.3f} {1:d}\n'.format(now, numReps))
         f.flush()
 
-def doMainLoop(delayMin):
+def doMainLoop(delayMin, testMode):
     done = {}
     while True:
         resp = False
@@ -52,13 +57,16 @@ def doMainLoop(delayMin):
             numReps = simp.askinteger('Repetitions', prompt='How many ' + ex + ' did you do?')
             if numReps is not None:
                 done[ex] = done.get(ex, 0) + numReps
-                logExercise(ex, numReps)
+                logExercise(ex, numReps, testMode)
         time.sleep(delayMin * 60)
 
 if __name__ == "__main__":
     op = optparse.OptionParser()
     op.add_option('-d', '--delay', type=float, dest='delay', help='Time (minutes) between reminders.', default=10)
+    op.add_option('-t', '--test', action='store_true', dest='test', help='Set to test mode.', default=False)
     (opts, args) = op.parse_args()
+    if opts.test:
+        opts.delay = 0.1
     random.seed(None)
-    doMainLoop(opts.delay)
+    doMainLoop(opts.delay, opts.test)
 
