@@ -7,14 +7,15 @@ import time
 import tkinter.messagebox as msg
 import tkinter.simpledialog as simp
 
+chest = ('pushups', 'wide-pushups')
+arms = ('curls', 'tricep extensions', 'skull crushers', 'reverse curls', 'hammer curls')
+shoulders = ('shoulder flies', 'military presses', 'front raises')
+back = ('bent rows', 'lower back raises', 'pull backs', 'pull downs')
+legs = ('lunges', 'squats', 'calf raises')
+core = ('situps', 'side bends', 'leg raises')
+stretching = ('hamstring stretch', 'back-stretch')
+
 def pickExercise():
-    chest = ('pushups', 'wide-pushups')
-    arms = ('curls', 'tricep extensions', 'reverse curls')
-    shoulders = ('shoulder flies', 'military presses', 'front raises')
-    back = ('bent rows', 'lower back raises', 'pull backs', 'pull downs')
-    legs = ('lunges', 'squats')
-    core = ('situps', 'side bends')
-    stretching = ('hamstring stretch', 'back-stretch')
     # Since there are more exercises for certain categories, first
     # randomly pick the category, so that way you don't cheat and
     # only work out body parts with more options
@@ -58,6 +59,8 @@ def doMainLoop(delayMin, testMode):
             if numReps is not None:
                 done[ex] = done.get(ex, 0) + numReps
                 logExercise(ex, numReps, testMode)
+        if random.uniform(0, 1) < 0.33:
+            msg.showwarning('Water break', message='Make sure you drink enough water.')
         time.sleep(delayMin * 60)
 
 if __name__ == "__main__":
