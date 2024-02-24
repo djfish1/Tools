@@ -1,7 +1,7 @@
-colorscheme default
-"colorscheme elflord
+"colorscheme default
+"hi DiffText term=reverse cterm=bold ctermbg=12 gui=none guibg=LightGreen
 
-hi DiffText term=reverse cterm=bold ctermbg=12 gui=bold guibg=LightGreen
+colorscheme elflord
 
 set guifont=Monospace\ 10
 

@@ -1,7 +1,7 @@
 setenv CODE_HOME $HOME/Code
 setenv SARA_HOME $CODE_HOME/SaraTrunk
 setenv TP_HOME $CODE_HOME/Terrapan/terrapan-master/pytpl/trunk
-setenv TOOLS_HOME $HOME/Code/Git/Tools
+setenv TOOLS_HOME $CODE_HOME/Git/Tools
 setenv SARA_SVN https://geosvn.sdsu.edu/svn/sara/trunk
 
 set -f path=($path $TOOLS_HOME $HOME/Software/JDK/jdk1.8.0_121/bin)
