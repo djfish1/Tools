@@ -10,16 +10,21 @@ import tkinter.simpledialog as simp
 chest = ('pushups', 'wide-pushups')
 arms = ('curls', 'tricep extensions', 'skull crushers', 'reverse curls', 'hammer curls')
 shoulders = ('shoulder flies', 'military presses', 'front raises')
-back = ('bent rows', 'lower back raises', 'pull backs', 'pull downs')
-legs = ('lunges', 'squats', 'calf raises')
-core = ('situps', 'side bends', 'leg raises')
-stretching = ('hamstring stretch', 'back-stretch')
+back = ('rows', 'lower back raises', 'pull backs', 'pull downs')
+# No lunges for SI
+#legs = ('lunges', 'squats', 'calf raises')
+legs = ('squats', 'calf raises')
+core = ('situps', 'side bends', 'leg raises', 'dead bugs')
+stretching = ('hamstring stretch', 'back stretch', 'calf stretch', 'side bends')
+# No burpees for SI
+#cardio = ('jumping jacks', 'burpees', 'mountain climbers', 'running-in-place')
+cardio = ('jumping jacks', 'mountain climbers', 'running-in-place')
 
 def pickExercise():
     # Since there are more exercises for certain categories, first
     # randomly pick the category, so that way you don't cheat and
     # only work out body parts with more options
-    categories = (chest, arms, shoulders, legs, back, core, stretching)
+    categories = (chest, arms, shoulders, legs, back, core, stretching, cardio)
     category = random.choice(categories)
     exercise = random.choice(category)
     #print(category, exercise)
